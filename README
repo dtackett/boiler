@@ -1,0 +1,3 @@
+mvn jetty:run
+
+mvn integration-test
