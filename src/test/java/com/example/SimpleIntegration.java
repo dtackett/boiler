@@ -1,15 +1,20 @@
-package com.meltmedia;
+package com.example;
  
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
  
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
   
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -38,7 +43,6 @@ import org.apache.http.client.methods.HttpGet;
  * Make sure the literal URL below matches that defined in pom.xml
  */
 public class SimpleIntegration {
- 
     /** URL */
     private static final String URL = "http://localhost:8080/rest/test";
  
@@ -70,8 +74,27 @@ public class SimpleIntegration {
         try {
             HttpResponse response = client.execute(new HttpGet(URL));
             assertEquals(200, response.getStatusLine().getStatusCode());
+            
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            assertEquals("who are you?", rd.readLine());
         } catch (Exception e) {
             fail(ERR_MSG + e);
         }
     }
+    
+    /**
+     * Test method for {@link com.example.Main#getMessage()}.
+     */
+    @Test
+    public void testGetMessageAuth() {
+        try {
+            HttpResponse response = client.execute(new HttpGet(URL));
+            assertEquals(200, response.getStatusLine().getStatusCode());
+            
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            assertEquals("who are you?", rd.readLine());
+        } catch (Exception e) {
+            fail(ERR_MSG + e);
+        }
+    }    
 }
