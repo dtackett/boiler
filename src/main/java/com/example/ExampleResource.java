@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
@@ -20,8 +22,14 @@ public class ExampleResource {
 
   @GET
   @Produces("application/json")
-  public String getExamples( ) {
-    return null;
+  public List<Example> getExamples( ) {
+    provider.get().getTransaction().begin();
+    
+    List<Example> examples = provider.get().createQuery("select e from Example e").getResultList();
+    
+    provider.get().getTransaction().commit();
+    
+    return examples;
   }
  
   @GET
