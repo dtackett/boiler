@@ -53,7 +53,7 @@ public class GroovyExampleIntegration {
        def http = new RESTClient( URL )
 
        try {
-         def resp = http.get(path: '-1',
+         def resp = http.get(path: '/rest/example/-1',
            requestContentType: "application/json")
          assert false, "Expected exception"
        } catch ( ex ) {
@@ -73,4 +73,33 @@ public class GroovyExampleIntegration {
        assert resp.status == 200
        assert resp.data.asList.size == 1
    }
+   
+   /**
+   * Test method for {@link com.example.ExampleResource#addExample()} and {@link com.example.ExampleResource#getExample()}.
+   */
+  @Test
+  public void testDeleteExample() {
+      def http = new RESTClient( URL )
+      
+      // Create the resource
+      def resp = http.post(body: [title:"delete me"],
+        requestContentType: "application/json")
+      
+      assert resp.status == 200
+      assert resp.data.title == "delete me"
+      
+      // Get the resource
+      resp = http.delete(path: '/rest/example/'+resp.data.id,
+        requestContentType: "application/json")
+      
+      assert resp.status == 200
+      
+      try {
+        resp = http.get(path: '/rest/example/'+resp.data.id,
+          requestContentType: "application/json")
+        assert false, "Expected exception"
+      } catch ( ex ) {
+        assert ex.response.status == 404
+      }
+  }
 }

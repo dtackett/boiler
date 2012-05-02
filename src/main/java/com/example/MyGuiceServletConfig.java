@@ -48,10 +48,13 @@ public class MyGuiceServletConfig extends GuiceServletContextListener {
         install(new JpaPersistModule("org.hibernate.tutorial.jpa"));        
         
         filter("/*").through(PersistFilter.class);
+        // Guice/Shiro compatibility filter
         filter("/*").through(GuiceShiroFilter.class);
         
         Map<String, String> params = new HashMap<String, String>();
+        // Turn on pojo mapping for json
         params.put("com.sun.jersey.api.json.POJOMappingFeature", "true");
+        // Scan packages for Jersey resource endpoints
         params.put(PackagesResourceConfig.PROPERTY_PACKAGES, "com.example");    
 //        params.put("javax.ws.rs.Application", "com.example.MainJerseyApplication");        
         serve("/rest/*").with(GuiceContainer.class, params);
