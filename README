@@ -1,3 +1,36 @@
 mvn jetty:run
 
 mvn integration-test
+
+
+
+-----
+#Goals
+
+    "application/scheme+json"
+
+    "application/example+json" : {
+      "type" : "object",
+      "properties" : {
+        "id": { "type": "number" },
+        "title": { "type" : "string"},
+        "note" : { "type" : "string"}
+      }
+    }
+
+
+###Root
+
+    {
+      links : [
+        {
+          rel: "examples",
+          href: "/rest/example",
+          contentType: "application/example+json"
+        }, {
+          rel: "users",
+          href: "/rest/users",
+          contentType: "application/user+json"
+        }
+      ]
+    }
