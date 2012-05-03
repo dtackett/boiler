@@ -18,15 +18,15 @@ import com.google.inject.persist.Transactional;
 import com.google.inject.servlet.RequestScoped;
 
 @Path("/example")
+@RequestScoped
 public class ExampleResource {
   
-  @Inject EntityManager provider;
+  @Inject ExampleDAO dao;
 
   @GET
   @Produces("application/json")
-  @Transactional
   public List<Example> getExamples( ) {
-    List<Example> examples = provider.createQuery("select e from Example e").getResultList();
+    List<Example> examples = dao.list();
     
     return examples;
   }
@@ -34,9 +34,8 @@ public class ExampleResource {
   @GET
   @Path("/{exampleId}")
   @Produces("application/json")
-  @Transactional
   public Example getExample(@PathParam("exampleId") Long id) {
-    Example exp = provider.find(Example.class, id);
+    Example exp = dao.get(id);
     
     if (exp == null) {
       throw new WebApplicationException(404);
@@ -48,12 +47,11 @@ public class ExampleResource {
   @DELETE
   @Path("/{exampleId}")
   @Produces("application/json")
-  @Transactional  
   public Example deleteExample(@PathParam("exampleId") Long id) {
-    Example exp = provider.find(Example.class, id);
+    Example exp = dao.get(id);
     
     if (exp != null)
-      provider.remove(exp);
+      dao.delete(exp);
     
     if (exp == null) {
       throw new WebApplicationException(404);
@@ -65,13 +63,12 @@ public class ExampleResource {
   @POST
   @Consumes("application/json")
   @Produces("application/json") 
-  @Transactional  
   public Example addExample(Example rep) {
     
     Example exp = new Example();
     exp.setTitle(rep.getTitle());
     
-    provider.persist(exp);
+    dao.create(exp);
    
     return exp;
   } 
