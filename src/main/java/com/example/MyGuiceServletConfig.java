@@ -45,7 +45,7 @@ public class MyGuiceServletConfig extends GuiceServletContextListener {
     Injector injector = Guice.createInjector(new JerseyServletModule() {
       @Override
       protected void configureServlets() {
-        install(new JpaPersistModule("org.hibernate.tutorial.jpa"));        
+        install(new JpaPersistModule("boilerJPAUnit"));        
         
         filter("/*").through(PersistFilter.class);
         // Guice/Shiro compatibility filter
