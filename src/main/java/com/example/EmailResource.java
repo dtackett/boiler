@@ -1,13 +1,13 @@
 package com.example;
 
-import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,10 +24,15 @@ public class EmailResource {
   @Produces("application/json") 
   public Response addExample(Email mail) {
     
-    Properties props = new Properties();
-    props.put("mail.smtp.host", "localhost");
-    props.put("mail.smtp.port", "5000");
-    Session session = Session.getInstance(props);
+    Session session = null;
+    try {
+      session = (Session) new InitialContext().lookup("java:comp/env/mail/Session");
+    } catch (NamingException e1) {
+      // Failed to get mail session.
+      e1.printStackTrace();
+      return Response.status(500).build();
+    }
+
     try {
       Message msg = new MimeMessage(session);
       msg.setFrom(new InternetAddress("test@example.com"));
