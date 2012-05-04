@@ -3,8 +3,12 @@ package com.example;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.Session;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
+import javax.ws.rs.core.Response;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.config.Ini;
@@ -58,7 +62,7 @@ public class MyGuiceServletConfig extends GuiceServletContextListener {
         // Scan packages for Jersey resource endpoints
         params.put(PackagesResourceConfig.PROPERTY_PACKAGES, "com.example");    
 //        params.put("javax.ws.rs.Application", "com.example.MainJerseyApplication");        
-        serve("/rest/*").with(GuiceContainer.class, params);
+        serve("/rest/*").with(GuiceContainer.class, params);    
       }
     }, new ShiroWebModule(servletContext) {
       @Override
