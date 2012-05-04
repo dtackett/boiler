@@ -28,7 +28,7 @@
 
     <persistence-unit name="boilerJPAUnit" transaction-type="RESOURCE_LOCAL">
 
-        <class>com.example.Example</class>
+        <class>com.example.data.Example</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

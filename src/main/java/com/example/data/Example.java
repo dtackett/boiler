@@ -1,4 +1,4 @@
-package com.example;
+package com.example.data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,24 +9,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table( name = "EXAMPLE" )
-public class Example {
-  private Long id;
-  
+public class Example extends BaseEntity {
   private String title;
   
   public Example() {
     
-  }
-  
-  @Id
-  @GeneratedValue(generator="increment")
-  @GenericGenerator(name="increment", strategy="increment")
-  public Long getId() {
-    return id;
-  }
-  
-  public void setId(Long id) {
-    this.id = id;
   }
   
   public String getTitle() {

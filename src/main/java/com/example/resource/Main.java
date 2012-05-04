@@ -1,4 +1,4 @@
-package com.example;
+package com.example.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;

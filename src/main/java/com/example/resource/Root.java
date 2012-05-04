@@ -1,8 +1,7 @@
-package com.example;
+package com.example.resource;
 
 import java.net.URI;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -10,8 +9,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.inject.Singleton;
+
 @Path("/")
+@Singleton
 public class Root {
+  private final Logger log = LoggerFactory.getLogger(getClass());
+  
   @Context UriInfo uriInfo;
   
   @GET

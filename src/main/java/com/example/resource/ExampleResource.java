@@ -1,9 +1,8 @@
-package com.example;
+package com.example.resource;
 
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,7 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 
-import com.google.inject.Provider;
+import com.example.dao.ExampleDAO;
+import com.example.data.Example;
 import com.sun.jersey.spi.resource.Singleton;
 
 @Path("/example")
@@ -50,7 +50,7 @@ public class ExampleResource {
     Example exp = dao.get(id);
     
     if (exp != null)
-      dao.delete(exp);
+      dao.deleteById(id);
     
     if (exp == null) {
       throw new WebApplicationException(404);

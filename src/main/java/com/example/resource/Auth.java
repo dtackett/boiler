@@ -1,4 +1,4 @@
-package com.example;
+package com.example.resource;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

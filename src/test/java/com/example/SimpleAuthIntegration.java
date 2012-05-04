@@ -42,7 +42,7 @@ public class SimpleAuthIntegration {
   }
 
   /**
-   * Test method for {@link com.example.Auth#login()}.
+   * Test method for {@link com.example.resource.Auth#login()}.
    */
   @Test
   public void testAuth() {
@@ -62,14 +62,14 @@ public class SimpleAuthIntegration {
         assertEquals(200, response.getStatusLine().getStatusCode());
         
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        assertEquals("hello lonestarr", rd.readLine());                
+        assertEquals("hello 1", rd.readLine());                
       } catch (Exception e) {
           fail(ERR_MSG + e);
       }
   }
   
   /**
-   * Test method for {@link com.example.Auth#login()}.
+   * Test method for {@link com.example.resource.Auth#login()}.
    */
   @Test
   public void testInvalidAuth() {

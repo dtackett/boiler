@@ -67,7 +67,7 @@ public class SimpleIntegration {
     }
  
     /**
-     * Test method for {@link com.example.Main#getMessage()}.
+     * Test method for {@link com.example.resource.Main#getMessage()}.
      */
     @Test
     public void testGetMessage() {
@@ -83,7 +83,7 @@ public class SimpleIntegration {
     }
     
     /**
-     * Test method for {@link com.example.Main#getMessage()}.
+     * Test method for {@link com.example.resource.Main#getMessage()}.
      */
     @Test
     public void testGetMessageAuth() {

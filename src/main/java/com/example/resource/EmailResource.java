@@ -1,4 +1,4 @@
-package com.example;
+package com.example.resource;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import com.example.Email;
 import com.sun.jersey.spi.resource.Singleton;
 
 @Path("/email")
