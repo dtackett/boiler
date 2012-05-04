@@ -14,11 +14,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 
 import com.google.inject.Provider;
-import com.google.inject.persist.Transactional;
-import com.google.inject.servlet.RequestScoped;
+import com.sun.jersey.spi.resource.Singleton;
 
 @Path("/example")
-@RequestScoped
+@Singleton
 public class ExampleResource {
   
   @Inject ExampleDAO dao;

@@ -95,6 +95,13 @@
           <artifactId>jetty-util</artifactId>
           <version>6.1.26</version>
         </dependency>
+        
+				<dependency>
+				  <groupId>javax.mail</groupId>
+				  <artifactId>mail</artifactId>
+				  <version>1.4</version>
+				</dependency>        
+        
         <dependency>
           <groupId>org.codehaus.groovy</groupId>
           <artifactId>groovy-all</artifactId>
@@ -104,7 +111,15 @@
 				  <groupId>org.codehaus.groovy.modules.http-builder</groupId>
 				  <artifactId>http-builder</artifactId>
 				  <version>0.5.2</version>
-				</dependency>      
+				</dependency>
+				
+				<!-- Testing -->      
+				<dependency>
+				  <groupId>dumbster</groupId>
+				  <artifactId>dumbster</artifactId>
+				  <version>1.6</version>
+				  <scope>test</scope>
+				</dependency>				
     </dependencies>
     <build>
         <finalName>server</finalName>
@@ -138,6 +153,8 @@
                 </execution>
               </executions>
             </plugin>
+            
+            <!-- Plugin for Groovy unit tests -->
 		        <plugin>
 		          <groupId>org.codehaus.gmaven</groupId>
 		          <artifactId>gmaven-plugin</artifactId>
@@ -170,16 +187,19 @@
 		              </goals>
 		            </execution>
 		          </executions>
-		        </plugin>           
+		        </plugin>      
+		             
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <!-- Don't run integration tests normally -->
                     <excludes>
                         <exclude>**/*Integration.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
                     <execution>
+                        <!-- Run integration tests but not unit tests -->
                         <id>integration-test</id>
                         <goals>
                             <goal>test</goal>
