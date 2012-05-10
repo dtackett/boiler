@@ -6,8 +6,7 @@
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
-    <dependencies>
-    
+    <dependencies>   
         <!-- Jersey to simplify endpoint creation -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
