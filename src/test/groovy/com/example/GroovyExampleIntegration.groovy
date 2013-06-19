@@ -37,6 +37,10 @@ public class GroovyExampleIntegration {
         
         assert resp.status == 200
         assert resp.data.title == "test"
+
+        // Delete the entry (so as not to pollute the rest of the tests)
+        http.delete(path: '/rest/example/'+resp.data.id,
+        requestContentType: "application/json")
     }
     
     /**
@@ -65,7 +69,7 @@ public class GroovyExampleIntegration {
        def resp = http.get(requestContentType: "application/json")
        
        assert resp.status == 200
-       assert resp.data.asList.size == 1
+       assert resp.data.asList.size == 0
    }
    
    /**
